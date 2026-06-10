@@ -248,41 +248,47 @@ body {
 /* Mobile Phones (Portrait) */
 @media (max-width: 480px) {
     body {
-        padding: 16px;
+        padding: 0;
+        align-items: flex-start; /* Prevent cut-off */
     }
     .container {
         width: 100%;
         max-width: 100%;
-        padding: 24px 20px;
-        border-radius: 20px;
+        min-height: 100vh;
+        padding: 8vh 24px 40px 24px;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        margin: 0;
     }
     .logo-image {
         width: 90px;
         border-radius: 18px;
     }
     .brand-name {
-        font-size: 24px;
+        font-size: 28px;
     }
     .slogan {
-        font-size: 13px;
+        font-size: 14px;
     }
     .description {
-        font-size: 14px;
+        font-size: 15px;
         margin-bottom: 24px;
     }
     .download-btn {
         font-size: 16px;
-        padding: 14px 20px;
+        padding: 16px 20px;
     }
     .instructions {
-        padding: 20px 16px;
+        padding: 24px 20px;
         margin-top: 32px;
+        background: rgba(255, 255, 255, 0.75);
     }
     .instructions h3 {
-        font-size: 16px;
+        font-size: 17px;
     }
     .step p {
-        font-size: 13px;
+        font-size: 14px;
     }
 }
 
@@ -302,22 +308,46 @@ body {
 @media (max-height: 480px) and (orientation: landscape) {
     body {
         padding: 16px;
+        align-items: center;
     }
     .container {
-        padding: 20px;
-    }
-    .logo-image {
-        width: 70px;
-        margin-bottom: 12px;
+        max-width: 850px;
+        padding: 24px 32px;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "header content"
+            "header instructions";
+        gap: 16px 40px;
+        align-items: center;
+        text-align: left;
     }
     .header {
-        margin-bottom: 16px;
+        grid-area: header;
+        margin-bottom: 0;
+    }
+    .logo-image {
+        margin: 0 0 20px 0;
+        width: 80px;
+    }
+    .main-content {
+        grid-area: content;
     }
     .brand-name {
-        font-size: 22px;
+        font-size: 26px;
     }
     .description {
-        font-size: 13px;
+        font-size: 14px;
         margin-bottom: 16px;
+    }
+    .download-btn {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    .instructions {
+        grid-area: instructions;
+        margin-top: 0;
+        padding: 16px 20px;
     }
 }
