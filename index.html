@@ -30,37 +30,80 @@
                 học tập và AI gợi ý món ăn độc quyền!
             </p>
 
-            <a href="famihub.apk" class="download-btn" download>
-                <div class="btn-content">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                    Tải xuống cho Android (.APK)
-                </div>
-                <div class="btn-glow"></div>
-            </a>
+            <!-- Registration Form -->
+            <div id="registration-section">
+                <p class="instruction-text">Vui lòng nhập email của bạn để tiếp tục tải ứng dụng:</p>
+                <form id="email-form" class="email-form">
+                    <input type="email" id="user-email" placeholder="Nhập địa chỉ email..." required
+                        class="email-input">
+                    <button type="submit" class="download-btn submit-btn">
+                        <div class="btn-content">Tiếp tục</div>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Download Links (Hidden Initially) -->
+            <div id="download-section" style="display: none; text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                <h3 style="color: #2e7d32; margin-bottom: 12px; font-size: 22px;">Đăng ký thành công!</h3>
+                <p style="line-height: 1.6; font-size: 15px;">
+                    Cảm ơn bạn đã quan tâm đến <b>FamiHub</b>.<br><br>
+                    Chúng tôi đã ghi nhận email của bạn. Nhóm phát triển sẽ tiến hành cấp quyền truy cập (Testing) cho
+                    email này trên hệ thống của Google Play.<br><br>
+                    <b>Vui lòng kiểm tra hộp thư đến (hoặc thư mục Spam) trong thời gian tới</b>. Chúng tôi sẽ gửi email
+                    kèm theo đường link tải ứng dụng và hướng dẫn cài đặt chi tiết cho bạn!
+                </p>
+            </div>
+
             <p class="version-info">Phiên bản 1.0.0 • Yêu cầu Android 8.0+</p>
         </div>
 
-        <div class="instructions">
-            <h3>Hướng dẫn cài đặt file APK</h3>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <p>Chạm vào nút <b>Tải xuống</b> và đồng ý lưu file.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <p>Mở file <b>famihub.apk</b> vừa tải về.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <p>Nếu có cảnh báo bảo mật, chọn <b>"Cài đặt từ nguồn không xác định"</b> và nhấn Cài đặt.</p>
-                </div>
-            </div>
-        </div>
+        <script>
+            document.getElementById('email-form').addEventListener('submit', function (e) {
+                // Ngăn chặn trang bị tải lại
+                e.preventDefault();
+
+                const email = document.getElementById('user-email').value;
+                const submitBtn = document.querySelector('.submit-btn');
+                const btnContent = submitBtn.querySelector('.btn-content');
+
+                if (email) {
+                    btnContent.innerText = 'Đang xử lý...';
+
+                    // QUAN TRỌNG: Thay thế 'MÃ_FORMSPREE_CỦA_BẠN' bằng ID thực tế bạn lấy từ Formspree.io
+                    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpqeblwd';
+
+                    // Gửi email lên Formspree
+                    fetch(FORMSPREE_ENDPOINT, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            message: 'Đăng ký nhận bản Tester FamiHub'
+                        })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Ẩn form, hiện thông báo thành công
+                                document.getElementById('registration-section').style.display = 'none';
+                                document.getElementById('download-section').style.display = 'block';
+                            } else {
+                                alert("Có lỗi xảy ra, vui lòng thử lại sau!");
+                                btnContent.innerText = 'Tiếp tục';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert("Lỗi kết nối mạng, vui lòng thử lại!");
+                            btnContent.innerText = 'Tiếp tục';
+                        });
+                }
+            });
+        </script>
     </div>
 </body>
 
