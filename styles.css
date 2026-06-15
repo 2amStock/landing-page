@@ -351,3 +351,57 @@ body {
         padding: 16px 20px;
     }
 }
+
+/* --- Forms & Buttons Additions --- */
+.email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.email-input {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 50px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.email-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 126, 179, 0.1);
+    background: #fff;
+}
+
+.submit-btn {
+    border: none;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    background: linear-gradient(135deg, #4A90E2, #357ABD);
+    margin-top: 16px;
+}
+
+.secondary-btn:hover {
+    box-shadow: 0 15px 30px rgba(74, 144, 226, 0.4);
+}
+
+.instruction-text {
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.success-text {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #2e7d32;
+    font-weight: 600;
+}
